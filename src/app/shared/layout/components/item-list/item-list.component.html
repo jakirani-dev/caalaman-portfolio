@@ -1,14 +1,49 @@
-
-    <div class="flex-vertical-container">
-        <div class="flex-vertical-items">
-            <div class="item-card" *ngFor="let identItems of arrIDItems">
-            <h3>{{ identItems.id }}</h3>
-                <p>Available slots: {{ identItems.availableSlots }}</p>
-                <p>Locations: {{ identItems.locations }}</p>
-                <p>Days of Operation: {{ identItems.operatingHours.daysOfOperation }}</p>
-                <p>Operating Hours: {{identItems.operatingHours.startTime}} - {{identItems.operatingHours.endTime}}</p>
-            </div>
-        </div>
+<!-- Hero Banner -->
+<div class="hero-banner">
+  <div class="hero-text">
+    <h1>PH Identification Services ✨</h1>
+    <p>Find requirements, steps, and book appointments<br>for government identification services.</p>
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Search services... (e.g., Passport, PhilID, Driver's License)" />
+      <button>Search</button>
     </div>
+    <div class="filter-chips">
+      <button *ngFor="let f of filters" [class.active]="activeFilter === f" (click)="setFilter(f)">
+        {{ f }}
+      </button>
+    </div>
+  </div>
+    <div class="hero-art">
+        <div class="art-building">🏛️</div>
+        <div class="art-flag">🇵🇭</div>
+        <div class="art-card">🪪</div>
+    </div>
+</div>
 
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-icon blue">📋</span><strong>24</strong><span>Available Services</span></div>
+  <div class="stat"><span class="stat-icon green">🏛️</span><strong>8</strong><span>Government Agencies</span></div>
+  <div class="stat"><span class="stat-icon purple">📍</span><strong>150+</strong><span>Offices Nationwide</span></div>
+  <div class="stat"><span class="stat-icon orange">🕐</span><strong>Today</strong><span>Appointments</span></div>
+</div>
 
+<!-- Section Header -->
+<div class="section-header">
+  <h2>Popular Identification Services</h2>
+  <a href="#">View all services →</a>
+</div>
+
+<!-- Cards Grid (THIS PART must still be here) -->
+<div class="cards-grid">
+  <div class="service-card" *ngFor="let service of filtered">
+    <div class="card-icon">🪪</div>
+    <div class="card-body">
+      <h3>{{ service.id }}</h3>
+      <p class="agency">{{ service.issuingAgency }}</p>
+      <p class="processing">🕐 {{ service.processingTime }}</p>
+    </div>
+    <button class="view-btn" (click)="viewDetails(service)">View Details →</button>
+  </div>
+</div>

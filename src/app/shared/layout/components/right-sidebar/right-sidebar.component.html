@@ -1,0 +1,59 @@
+<aside class="right-sidebar">
+
+  <!-- Quick Actions -->
+  <div class="widget">
+    <h3 class="widget-title">Quick Actions</h3>
+    <div class="quick-actions">
+      <button class="action-item blue">
+        <span class="action-icon">📅</span>
+        <span>Book an Appointment</span>
+        <span class="arrow">›</span>
+      </button>
+      <button class="action-item purple">
+        <span class="action-icon">🔍</span>
+        <span>Check Appointment Status</span>
+        <span class="arrow">›</span>
+      </button>
+      <button class="action-item green">
+        <span class="action-icon">📍</span>
+        <span>Find Nearest Office</span>
+        <span class="arrow">›</span>
+      </button>
+      <button class="action-item orange">
+        <span class="action-icon">⚏</span>
+        <span>View All Services</span>
+        <span class="arrow">›</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Nearest Offices -->
+  <div class="widget">
+    <div class="widget-header">
+      <h3 class="widget-title">Nearest Offices</h3>
+      <a href="#" class="view-all">View all</a>
+    </div>
+
+    <div class="office-list">
+      <div class="office-item" *ngFor="let office of nearestOffices">
+        <span class="office-pin">📍</span>
+        <div class="office-info">
+          <p class="office-name">{{ office.name }}</p>
+          <p class="office-addr">{{ office.address }}</p>
+        </div>
+        <span class="office-dist">{{ office.distance }}</span>
+      </div>
+    </div>
+
+    <!-- Map placeholder -->
+    <div class="map-placeholder">
+      <div class="map-dots">
+        <span class="map-pin">📍</span>
+        <span class="map-pin">📍</span>
+        <span class="map-pin">📍</span>
+      </div>
+      <button class="view-map-btn">🗺 View on Map ↗</button>
+    </div>
+  </div>
+
+</aside>
