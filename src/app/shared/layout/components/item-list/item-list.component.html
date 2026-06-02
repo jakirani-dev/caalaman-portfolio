@@ -1,0 +1,14 @@
+
+    <div class="flex-vertical-container">
+        <div class="flex-vertical-items">
+            <div class="item-card" *ngFor="let identItems of arrIDItems">
+            <h3>{{ identItems.id }}</h3>
+                <p>Available slots: {{ identItems.availableSlots }}</p>
+                <p>Locations: {{ identItems.locations }}</p>
+                <p>Days of Operation: {{ identItems.operatingHours.daysOfOperation }}</p>
+                <p>Operating Hours: {{identItems.operatingHours.startTime}} - {{identItems.operatingHours.endTime}}</p>
+            </div>
+        </div>
+    </div>
+
+
