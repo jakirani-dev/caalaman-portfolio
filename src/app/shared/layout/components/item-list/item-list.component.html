@@ -1,15 +1,17 @@
-<!-- Hero Banner -->
+
+<div class="item-list">
+  
 <div class="hero-banner">
   <div class="hero-text">
     <h1>PH Identification Services ✨</h1>
     <p>Find requirements, steps, and book appointments<br>for government identification services.</p>
     <div class="search-bar">
       <span>🔍</span>
-      <input type="text" placeholder="Search services... (e.g., Passport, PhilID, Driver's License)" />
-      <button>Search</button>
+      <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Search services(e.g., Passport, PhilID, Driver's License)" />
+      <button >Search</button>
     </div>
     <div class="filter-chips">
-      <button *ngFor="let f of filters" [class.active]="activeFilter === f" (click)="setFilter(f)">
+      <button *ngFor="let f of filters" [class.active]="activeFilter === f" >
         {{ f }}
       </button>
     </div>
@@ -32,18 +34,21 @@
 <!-- Section Header -->
 <div class="section-header">
   <h2>Popular Identification Services</h2>
-  <a href="#">View all services →</a>
+  <a href="#">View all services</a>
 </div>
 
 <!-- Cards Grid (THIS PART must still be here) -->
-<div class="cards-grid">
-  <div class="service-card" *ngFor="let service of filtered">
-    <div class="card-icon">🪪</div>
-    <div class="card-body">
-      <h3>{{ service.id }}</h3>
-      <p class="agency">{{ service.issuingAgency }}</p>
-      <p class="processing">🕐 {{ service.processingTime }}</p>
+<div class="flex-service-container">
+ 
+    <div class="service-card" *ngFor="let service of filtered">
+      <div class="card-icon">🪪</div>
+      <div class="card-body">
+        <h3>{{ service.id }}</h3>
+        <p class="agency">{{ service.issuingAgency }}</p>
+        <p class="processing">🕐 {{ service.processingTime }}</p>
+      </div>
+      <button class="view-btn" (click)="viewDetails(service)">View Details</button>
     </div>
-    <button class="view-btn" (click)="viewDetails(service)">View Details →</button>
-  </div>
+
+</div>
 </div>
