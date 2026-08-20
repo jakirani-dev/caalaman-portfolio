@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-right-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './right-sidebar.component.html',
-  styleUrls: ['./right-sidebar.component.less']
+  styleUrls: ['./right-sidebar.component.less'],
 })
 export class RightSidebarComponent {
   nearestOffices = [
@@ -14,4 +15,8 @@ export class RightSidebarComponent {
     { name: 'DFA Cebu Office', address: 'J. Luna Ave, Cebu City', distance: '2.8 km' },
     { name: 'LTO Cebu District Office', address: 'N. Bacalso Ave, Cebu City', distance: '3.5 km' },
   ];
+
+  protected bookAnAppointment() {
+    //navigate to appointment form
+  }
 }

@@ -1,1 +1,20 @@
-<p>appointment-form works!</p>
+<app-header-banner></app-header-banner>
+
+<div class="main-layout">
+  <app-left-sidebar></app-left-sidebar>
+
+  <main class="center-content">
+    <form action="">
+      <div formGroupName="personalInfo">
+        <input formControlName="firstName" class="id-details" />
+        <input formControlName="lastName" class="id-details" />
+        <input formControlName="email" class="id-details" />
+        <input formControlName="phoneNumber" class="id-details" />
+      </div>
+      <input class="id-type" />
+      <input class="address-card" />
+    </form>
+  </main>
+
+  <app-right-sidebar></app-right-sidebar>
+</div>

@@ -4,9 +4,16 @@ import { LandingPageComponent } from './shared/layout/components/landing-page/la
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {
-    path: 'service/:id',
+    path: 'appointment',
     loadComponent: () =>
-      import('./features/appointments/pages/appointment-form/appointment-form.component')
-        .then(m => m.AppointmentFormComponent)
-  }
+      import('./features/appointments/pages/appointment-form/appointment-form.component').then(
+        (m) => m.AppointmentFormComponent
+      ),
+  } /** ,
+  {
+    path: 'services/:id',
+    loadComponent: () =>
+      import('./features/services/pages/service-details/service-details.component')
+      .then(m => m.ServiceDetailsComponent)
+  }*/,
 ];

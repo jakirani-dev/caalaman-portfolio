@@ -1,12 +1,11 @@
 <aside class="right-sidebar">
-
   <!-- Quick Actions -->
   <div class="widget">
     <h3 class="widget-title">Quick Actions</h3>
     <div class="quick-actions">
       <button class="action-item blue">
         <span class="action-icon">📅</span>
-        <span>Book an Appointment</span>
+        <span [routerLink]="['/appointment']">Book an Appointment</span>
         <span class="arrow">›</span>
       </button>
       <button class="action-item purple">
@@ -35,14 +34,16 @@
     </div>
 
     <div class="office-list">
-      <div class="office-item" *ngFor="let office of nearestOffices">
-        <span class="office-pin">📍</span>
-        <div class="office-info">
-          <p class="office-name">{{ office.name }}</p>
-          <p class="office-addr">{{ office.address }}</p>
+      @for (office of nearestOffices; track office) {
+        <div class="office-item">
+          <span class="office-pin">📍</span>
+          <div class="office-info">
+            <p class="office-name">{{ office.name }}</p>
+            <p class="office-addr">{{ office.address }}</p>
+          </div>
+          <span class="office-dist">{{ office.distance }}</span>
         </div>
-        <span class="office-dist">{{ office.distance }}</span>
-      </div>
+      }
     </div>
 
     <!-- Map placeholder -->
@@ -55,5 +56,4 @@
       <button class="view-map-btn">🗺 View on Map ↗</button>
     </div>
   </div>
-
 </aside>

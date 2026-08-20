@@ -1,4 +1,4 @@
-export type PhilippineIDType =
+/**export type PhilippineIDType =
   | 'National ID (PhilID)'
   | 'Passport'
   | 'Driver\'s License'
@@ -44,4 +44,71 @@ export interface IDTypeWithSchedule {
   requiredDocuments: string[];
   availableSlots: TimeSlot[];
   appointments: AppointmentSchedule[];
+}**/
+
+export enum AppointmentStatus {
+  AVAILABLE = 'Available',
+  BOOKED = 'Booked',
+  PENDING = 'Pending',
+  COMPLETED = 'Completed',
+  CANCELLED = 'Cancelled',
+}
+
+export interface OfficeLocation {
+  id: string;
+  name: string;
+  city: string;
+  province: string;
+  address: string;
+
+  operatingHours: {
+    startTime: string;
+    endTime: string;
+    daysOfOperation: string[];
+  };
+}
+
+export interface GovernmentService {
+  id: number;
+  name: string;
+  description: string;
+
+  issuingAgency: string;
+
+  processingTime: {
+    minimumDays: number;
+    maximumDays: number;
+  };
+
+  cost: number;
+
+  requiredDocuments: string[];
+
+  locations: OfficeLocation[];
+
+  availableSlots: string[];
+}
+
+export interface AppointmentSchedule {
+  appointmentId: string;
+
+  serviceId: number;
+
+  applicantName: string;
+  applicantEmail: string;
+  applicantContactNumber: string;
+
+  locationId: string;
+
+  appointmentDate: string;
+  timeSlot: string;
+
+  status: AppointmentStatus;
+
+  fee: number;
+
+  notes?: string;
+
+  createdAt: string;
+  updatedAt?: string;
 }

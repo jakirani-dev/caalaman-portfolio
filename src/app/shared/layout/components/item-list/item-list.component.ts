@@ -1,65 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IdDataService } from '../../../../core/services/id-data.service';
-import { IDTypeWithSchedule } from './id-mock-data';
-
+import { ApiService } from '../../../../core/services/api.service';
+import { GovernmentService } from '../../../../models/id-service.model';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.less']
+  styleUrls: ['./item-list.component.less'],
 })
 export class ItemListComponent implements OnInit {
-  services: IDTypeWithSchedule[] = [];
-  filtered: IDTypeWithSchedule[] = [];
+  protected isDarkMode = false;
+  services: GovernmentService[] = [];
+  filtered: GovernmentService[] = [];
   activeFilter = 'All Services';
   searchQuery = '';
 
   filters = ['All Services', 'Identification', 'Permits', 'Clearances', 'Benefits'];
 
-  constructor(private idData: IdDataService, private router: Router) {}
+  private idData = inject(ApiService);
+  private router = inject(Router);
 
   ngOnInit() {
-    this.services = this.idData.getAllIDTypes();
-    this.filtered = this.services.slice(0, 6); 
-  }
-  
-  onSearch() {
-    this.applyFilters();
-    console.log("tangina mo");
+    this.idData.getAllServices().subscribe({
+      next: (data) => {
+        this.services = data;
+        this.filtered = data.slice(0, 6);
+      },
+      error: (err) => console.error('Failed to load services', err),
+    });
   }
 
+  onSearch() {
+    this.applyFilters();
+  }
+
+  protected toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    console.log('napindot naaaaaa!===', this.isDarkMode);
+  }
 
   applyFilters() {
     let results = this.services;
 
-    // apply search
     if (this.searchQuery.trim()) {
       const q = this.searchQuery.toLowerCase();
-      results = results.filter(s =>
-        s.id.toLowerCase().includes(q) ||
-        s.issuingAgency.toLowerCase().includes(q) ||
-        s.description.toLowerCase().includes(q)
+      results = results.filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.issuingAgency.toLowerCase().includes(q) ||
+          s.description.toLowerCase().includes(q)
       );
     }
 
-    // apply category filter (extend this logic as you categorize your data)
     if (this.activeFilter !== 'All Services') {
-      // placeholder — map categories to ID types as needed
+      // category filter logic here later
     }
 
     this.filtered = results.slice(0, 6);
-
-    return this.filtered
   }
-
-  viewDetails(service: IDTypeWithSchedule) {
-    this.router.navigate(['/service', service.id]);
-  }
-
- 
 }
